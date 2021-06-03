@@ -100,11 +100,39 @@ def main():
         the shortest path between the two locations.
         """
         deadline = 1
-        solution = None
-        while solution is None:
-            solution = find_itinerary(start_city, 1, end_city, deadline)
+        shortest = None
+        while shortest is None:
+            shortest = find_itinerary(start_city, 1, end_city, deadline)
             deadline += 1
-        return solution, deadline
+        return shortest, deadline
+
+    def challenge_find_shortest_itinerary(start_city, end_city):
+        """
+        Done in O(logn).
+        Inspired by Binary Search 
+        """
+        interval = 1
+        flag = True
+        deadline = 1
+        while flag:
+            short = find_itinerary(start_city, 1, end_city, deadline)
+            if short:
+                flag = False
+            else:
+                deadline += interval
+
+        upperBound = short.state[1]
+        lowerBound = deadline / 2
+
+        while lowerBound < upperBound:
+            mid = (upperBound + lowerBound) // 2
+            shortest = find_itinerary(start_city, 1, end_city, mid)
+            if shortest:
+                upperBound = shortest.state[1]
+            else:
+                lowerBound = mid + 1
+
+        return find_itinerary(start_city, 1, end_city, upperBound)
 
     # Part 2:
     flight = Flight('Rome', 1, 'Paris', 4)
@@ -143,7 +171,11 @@ def main():
     """
     Try to minimize the number of times your procedure calls find itinerary!
     """
-    print("\nAdditional Challenge:\nSee Part 3")
+    print("\nAdditional Challenge:")
+    pcStartCity = 'Rome'
+    pcEndCity = 'Istanbul'
+    pcOut = challenge_find_shortest_itinerary(pcStartCity, pcEndCity).solution()
+    print(pcOut)
 
 
 if __name__ == '__main__':
