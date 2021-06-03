@@ -139,6 +139,12 @@ def main():
         print(
             f'Starting From {p4StartCity} and calculated deadline {p4d}, your travese route is/are\n{p4.solution()}')
 
+    # Challenge:
+    """
+    Try to minimize the number of times your procedure calls find itinerary!
+    """
+    print("\nAdditional Challenge:\nSee Part 3")
+
 
 if __name__ == '__main__':
     main()
