@@ -121,8 +121,8 @@ def main():
             else:
                 deadline += interval
 
-        upperBound = short.state[1]
-        lowerBound = deadline / 2
+        upperBound = deadline
+        lowerBound = short.state[1]
 
         while lowerBound < upperBound:
             mid = (upperBound + lowerBound) // 2
