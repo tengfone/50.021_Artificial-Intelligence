@@ -4,7 +4,6 @@
 
 from __future__ import generators
 import operator, math, random, copy, sys, os.path, bisect, re
-from functools import reduce
 
 
 #______________________________________________________________________________
